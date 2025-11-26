@@ -1,19 +1,5 @@
-// ************************ Exempel 1 ************************//
-// Samla ihop parametrar till en funktion. Sparas i en array.
 
-// const add = (...args) => {
-//     let sum = 0;
-//     for(let i = 0; i < args.length; i++) {
-//         sum += args[i];
-//     }
-//     return sum;
-// }
-
-console.log(add(1,2,3,4,5,7,8,9));
-
-
-
-// // ************************ Exempel 2 ************************//
+// // ************************ Exempel 1 ************************//
 // Samla ihop resten av parametrarna till en funktion. Sparas i en array.
 
 const add = (x, ...args) => {
@@ -28,7 +14,7 @@ console.log(add(100, 1,2,3,4,5,7,8,9))
 
 
 
-// ************************ Exempel 3 ************************//
+// ************************ Exempel 2 ************************//
 // Rest i objekt
 const person = {
     name: 'Sandra',
@@ -39,8 +25,13 @@ const person = {
 }
 
 
+const {name, ...details} = person;
+console.log("details", details);
 
-// ************************ Exempel 4 ************************//
+// ************************ Exempel 3 ************************//
 // Rest i array
 const numbers = [1, 2, 3, 4, 5];
 
+const [first, ...rest] = numbers;
+console.log("first", first);
+console.log("rest", rest);

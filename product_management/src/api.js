@@ -9,4 +9,29 @@
  * - Update: products.map(p => p.id === id ? {...p, ...updates} : p)  // ny array
  * - Delete: products.filter(p => p.id !== id)  // ny array
  */
+ 
+
+// Create a product
+const addProduct = (products, newProduct) => {
+     return [...products, { ...newProduct, id: Date.now()}];
+}
+
+
+// Update a product - id, vad den som ska uppdateras med
+const updatedProduct = (products, productId, updates) => {
+    return products.map(product => {
+        return product.id === productId ? {...products, ...updates} : product;
+    })
+}
+
+// Deleta a product
+const removeProduct = (products, productId) => {
+    return products.filter(product => product.id !== productId);
+}
+
+
+
+// Delete a product 
+export { addProduct, updatedProduct, removeProduct};
+
 

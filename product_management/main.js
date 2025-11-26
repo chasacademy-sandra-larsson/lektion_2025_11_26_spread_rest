@@ -1,3 +1,5 @@
+import { addProduct, updatedProduct, removeProduct } from "./src/api.js"
+
 // --- UI Logic ---
 
 // State
@@ -48,13 +50,14 @@ addProductForm.addEventListener("submit", (event) => {
         const newProduct = {name, price};
 
         // Uppdatera state
-  
+        currentProducts = addProduct(currentProducts, newProduct);
 
         // Återställ formuläret
-
+        addProductForm.reset();
 
         // Render productlist
-
+        render();
+        console.log("State (currentList) with addProducts", currentProducts);
 
     }
 
@@ -64,13 +67,19 @@ addProductForm.addEventListener("submit", (event) => {
 // Handle edit and remove
 productListEl.addEventListener("click", (event) => {
     
+    // Hämtar id:et för produkten vi klickar på
     const id = Number(event.target.dataset.id); 
 
     // Delete
     if(event.target.classList.contains("btn-delete")) {
 
         // Update state
-    
+        currentProducts = removeProduct(currentProducts, id);
+
+        // Render UI
+        render();
+
+        console.log("State updated with Remove", currentProducts);
 
 
     }
@@ -82,15 +91,25 @@ productListEl.addEventListener("click", (event) => {
 
         if(!product) return;
 
-  
+        const newName = prompt("Enter new product name: ", product.name);
+        const newPrice = prompt("Enter new product price: ", product.price);
 
-        // New uodated object
+        // New updated object
+        const updates = {
+            name: newName,
+            price: parseFloat(newPrice)
+        }
         
 
         if(newName && newPrice) {
 
             // Update state - id skickas separat, inte i updates-objektet
-   
+            currentProducts = updatedProduct(currentProducts, id, updates);
+
+            // Render UI
+            render();
+            console.log("State updated (Update)", currentProducts);
+            
         }
     }
 

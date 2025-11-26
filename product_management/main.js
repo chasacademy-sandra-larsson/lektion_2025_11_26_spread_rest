@@ -10,6 +10,32 @@ const nameInput = document.getElementById('product-name');
 const priceInput = document.getElementById('product-price');
 
 
+function render() {
+    productListEl.innerHTML = '';
+
+    if (currentProducts.length === 0) {
+        productListEl.innerHTML = '<p class="empty-state">No products added yet.</p>';
+        return;
+    }
+
+    currentProducts.forEach(product => {
+        const item = document.createElement('div');
+        item.className = 'product-item';
+        item.innerHTML = `
+            <div class="product-info">
+                <h3>${product.name}</h3>
+                <span class="product-price">$${parseFloat(product.price).toFixed(2)}</span>
+            </div>
+            <div class="actions">
+                <button class="btn-edit" data-id="${product.id}">Edit</button>
+                <button class="btn-delete" data-id="${product.id}">Delete</button>
+            </div>
+        `;
+        productListEl.appendChild(item);
+    })
+}
+
+
 // New produt - form submit
 addProductForm.addEventListener("submit", (event) => {
     event.preventDefault();
